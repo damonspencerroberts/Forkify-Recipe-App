@@ -1,7 +1,14 @@
 import Search from "./models/Search";
-import { elements, renderLoader, clearLoader, domStrings } from "./views/base";
+import {
+    elements,
+    renderLoader,
+    clearLoader,
+    domStrings,
+    windowResult
+} from "./views/base";
 import * as searchView from "./views/searchView";
 import Recipe from "./models/recipe";
+import * as recipeView from "./views/recipeView";
 
 
 
@@ -35,16 +42,20 @@ const controlSearch = async () => {
         searchView.clearResults();
         //add the renderLoader method
         renderLoader(elements.searchRes);
-        
-        //4)search for recipes
-        await state.search.getResults();
+        try {
+            //4)search for recipes
+            await state.search.getResults();
 
-        //5)render results on ui
-        //watch out here
-        searchView.renderResults(state.search.result);
-        // clear loader methodS
-        clearLoader();
-        //console.log(state.search.result)
+            //5)render results on ui
+            //watch out here
+            searchView.renderResults(state.search.result);
+            // clear loader methodS
+            clearLoader();
+            //console.log(state.search.result)
+        } catch(error) {
+            alert("Error Fetching Results on search")
+            clearLoader();
+        }
     }
 }
 
@@ -61,21 +72,53 @@ elements.searchResultsPages.click(e => {
         const goTo = parseInt(closeButton.dataset.page, 10);
         searchView.clearResults();
         searchView.renderResults(state.search.result, goTo);
-        
         //console.log(goTo);
     }
-
 });
 
 /**
  * Recipe Controller
- */
+ 
 
  //created from the R class constructor
  const r = new Recipe(35477);
  r.getRecipe();
- //r.calcTime();
- //r.calcServings();
- console.log(r);
+console.log(r)*/
+
+//needed to add the function up here
+const recipeController = async () => {
+    //gets the location of the id from the hash symbol in the url
+    //replace the hash symbol with nothing
+
+    //must use state
+    const id = window.location.hash.replace("#", "");
+    console.log(id);
+    //checks if there is an id in the url, (i.e not home)
+    if (id) {
+        //prepare ui for changes
+        recipeView.clearRecipe();
+        renderLoader(elements.recipeDiv);
+        //create new recipe object
+        state.recipe = new Recipe(id);
+        try {
+            //get recipe data
+            await state.recipe.getRecipe(); 
+            state.recipe.parseIngredients();
+            //calculate servings and time
+            state.recipe.calcTimeServ();
+            //render recipe
+            clearLoader();
+            recipeView.renderRecipe(state.recipe);
+           
+
+            console.log(state.recipe);
+        } catch (error) {
+            alert(error);
+        }
+    }
+
+};
 
 
+['hashchange', 'load'].forEach(e =>
+    elements.windowResult.on(e, recipeController));

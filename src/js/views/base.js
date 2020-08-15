@@ -5,7 +5,9 @@ export const elements = {
     searchInput: $('.search__field'),
     searchRes: $('.results'),
     searchResultsList: $('.results__list'),
-    searchResultsPages: $('.results__pages')
+    searchResultsPages: $('.results__pages'),
+    windowResult: $(window),
+    recipeDiv: $('.recipe')
 }
 //add domstrings object
 export const domStrings = {
