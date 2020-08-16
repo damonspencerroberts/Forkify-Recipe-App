@@ -9,7 +9,8 @@ export default class List {
     }
 
     //adds item when clicked
-    additem (count, unit, ingredient) {
+    addItem (count, unit, ingredient) {
+
         const item = {
             id: uniqid(),
             count,
@@ -17,6 +18,7 @@ export default class List {
             ingredient
         }
         this.items.push(item);
+        return item;
 
     }
 

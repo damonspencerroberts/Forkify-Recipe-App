@@ -9,6 +9,8 @@ import * as searchView from "./views/searchView";
 import Recipe from "./models/recipe";
 import * as recipeView from "./views/recipeView";
 import List from "./models/shopping";
+import { renderItem, deleteItem } from "./views/shoppingView";
+
 
 
 /**
@@ -19,7 +21,8 @@ import List from "./models/shopping";
  */
 
 const state = {};
-
+//allows us to see the state in the console
+window.state = state;
 /**
  * Seach Controller
  */
@@ -75,6 +78,8 @@ elements.searchResultsPages.click(e => {
     }
 });
 
+
+
 /**
  * Recipe Controller
  
@@ -119,7 +124,7 @@ const recipeController = async () => {
             recipeView.renderRecipe(state.recipe);
            
 
-            //console.log(state.recipe);
+            console.log(state.recipe);
         } catch (error) {
             alert(error);
         }
@@ -133,6 +138,48 @@ const recipeController = async () => {
 ['hashchange', 'load'].forEach(e =>
     elements.windowResult.on(e, recipeController));
 
+ /**
+ * List Controller
+ */
+
+
+
+
+    //create the list controller and call it down below
+const listController = () => {
+        // Create a new list IF there in none yet
+    if (!state.list) state.list = new List();
+    
+        // Add each ingredient to the list and UI
+    state.recipe.recipeIngredients.forEach(e => {
+        const item = state.list.addItem(e.count, e.unit, e.ingredient);
+        renderItem(item);
+    });
+}
+
+//const id is the clost of target of the click
+//use the dataset attribute method
+elements.shopping.click(e => {
+    const id = e.target.closest('.shopping__item').dataset.itemid;
+
+    //handle the delete method
+    if(e.target.matches('.shopping__delete, .shopping__delete *')) {
+        //Delete from state
+        state.list.deleteItem(id);
+
+        //delete from the UI
+        deleteItem(id);
+
+    //handle count update
+    } else if (e.target.matches('.shopping__count-value, .shopping__count-value *')) {
+        const v = parseFloat(e.target.value, 10) //the ,10 gives the decimal
+        state.list.updateCount(id, v)
+    }
+
+});
+
+
+
 //Handling recipe button clicks
 elements.recipeDiv.click(e => {
     if (e.target.matches('.btn-decrease, .btn-decrease *')) {
@@ -143,19 +190,19 @@ elements.recipeDiv.click(e => {
     } else if (e.target.matches('.btn-increse, .btn-increase *')){
         state.recipe.updateServings('inc');
         recipeView.updateServingsView(state.recipe);
+    } else if (e.target.matches('.recipe__btn-add, .recipe__btn-add *')) {
+        //catch the click of button in recipeadd button or child elements
+        listController();
+
     }
     //console.log(state.recipe);
 
-
 });
 
-window.l = new List();
 
-const listController = async () => {
-    //prepare the ui
 
-    //add the need recipe upon the click
 
-    //update the ui
 
-}
+
+
+

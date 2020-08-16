@@ -50,3 +50,36 @@
     //deletes portion of the array
     //[2,4,6] splice(1,1) return [2,6]
     //a way to update the count when it is in the shopping list
+
+    Part 10
+    ---------------------------------------
+    //select the id of the item base on its id
+    //and the data attribute
+    //add all the units from the item inputed
+    //delete item
+    //the id inputed catch it with $ selector and then remove
+
+    Part 11 List controller
+    --------------------------------------
+    //create the list controller and call it down below
+    //create a list if none exists
+    //prepare the ui
+    //add each ingredient to the list and UI
+    //add items upon click
+    //then renderthem with method created
+
+    Part 12
+    ---------------------------------------
+    //window.state = state; see state in console
+    //const id is the clost of target of the click
+    //use the dataset attribute method
+    //handle the delete method
+    //Delete from state
+    //delete from the UI
+    //create new variable holding the count value
+    //update the state of the list
+
+
+
+
+

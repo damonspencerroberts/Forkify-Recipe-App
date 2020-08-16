@@ -7,7 +7,8 @@ export const elements = {
     searchResultsList: $('.results__list'),
     searchResultsPages: $('.results__pages'),
     windowResult: $(window),
-    recipeDiv: $('.recipe')
+    recipeDiv: $('.recipe'),
+    shopping: $('.shopping__list')
 }
 //add domstrings object
 export const domStrings = {
