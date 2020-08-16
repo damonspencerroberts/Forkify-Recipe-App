@@ -1,6 +1,5 @@
 import {elements} from "./base";
-
-import "jquery";
+import $ from "jquery";
 
 //takes the value inputed by the useer
 export const getInput = () => elements.searchInput.val();
@@ -12,6 +11,12 @@ export const clearInput = () => elements.searchInput.val('');
 export const clearResults = () => {
     elements.searchResultsList.html('');
     elements.searchResultsPages.html('');
+}
+
+//remove the hightlight then add the highlights
+export const highlightSelected = id => {
+    $(".results__link").removeClass("results__link--active");
+    $(`a[href="#${id}"]`).addClass("results__link--active");
 }
 
 const recipeTitleLimit = (title, limit = 17) => {
@@ -30,7 +35,7 @@ const recipeTitleLimit = (title, limit = 17) => {
         }, 0);
         //return the result
         //joins the array by spaces...
-        return `${newTitle.join(' ')} ...`;
+        return `${newTitle.join(' ')}...`;
     }
     return title;
 };

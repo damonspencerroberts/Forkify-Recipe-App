@@ -34,42 +34,6 @@ export default class Recipe {
         this.servings = serving;
     }
 
-
-    //part 5
-    //homepage button
-    //show original method
-    //created method
-    //added two arrays and mapped throug to set each to lowercase and then for each in unitLong replace with unitShort
-    //replace parenthesis with space or nothing
-    //create array by splitting at ' '
-    //created unitIndex by finding the index in the newly split arrays. Find index where arrIngredients includes unitsShort
-    //if unit index was greater than -1 unit, parseInt(arrIng[0] === true) maybe unit, === -1 no unit
-    //1) create new array by slice at 0 to unitIndex, aka how many there were
-    //   - if array length === 1 set count = to first index and replace - with +
-     //   - else evaluate array ingredients sliced at 0, to unit index and join with + 
-
-    //   set count = count, unit = arrIngredients[unitIndex] and ingredient to arrIngredients.slice(unitIndex + 1).join(' ')
-    //2) set count = parseInt(arrIng[0]), unit '', and ingredient to arrIngredients.slice(1).join(' ')
-    //3) set count = 1, unit '', ingredient to ingredient
-    //set ingredients to the new ingredients
-
-
-    //-------------------------------------------------------------
-
-    //first created new file and function renderRecipe (displays on the ui)
-    //took html elements and put them into the new function, using template literals added elements from recipe
-    //then for ingredients mapped throught the array and for each ingedients added it to the ui
-    //then we appended the recipe to the html file
-    //imported it in the index.js file controller
-    //called it when id is found, and display on UI
-    //added the loader, and removed when found
-    //cleared input if new id was clicked
-
-
-    
-
-
-
     parseIngredients() {
         //loop through unitslong and replace with unitsshort
         const unitsLong = ['tablespoons', 'tablespoon', 'ounces', 'ounce', 'teaspoons', 'teaspoon', 'cups', 'pounds' ];
@@ -98,7 +62,6 @@ export default class Recipe {
                 //tests each elements in the arrIng array and
                 //checks where it is
             let objIngredient;
-///////////////////////////////////Check here///////////////////////////////
             if(unitIndex > -1) {
                 //there is a unit
                 //example: 4 1/2 will be [4, 1/2] eval("4+1/2") --> 4.5
@@ -140,4 +103,19 @@ export default class Recipe {
         this.recipeIngredients = newIngredients;
 
     }
+
+    //this goes on in the background
+    updateServings(type) {
+        //servings
+        const nS = type === 'dec' ? this.servings - 1: this.servings + 1;
+        
+
+        //ingredients
+        this.recipeIngredients.forEach(ing => {
+            ing.count *= (nS / this.servings);
+        });
+
+        this.servings = nS;
+    }
 }
+

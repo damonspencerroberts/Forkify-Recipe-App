@@ -3,13 +3,12 @@ import {
     elements,
     renderLoader,
     clearLoader,
-    domStrings,
-    windowResult
+    domStrings
 } from "./views/base";
 import * as searchView from "./views/searchView";
 import Recipe from "./models/recipe";
 import * as recipeView from "./views/recipeView";
-
+import List from "./models/shopping";
 
 
 /**
@@ -92,12 +91,21 @@ const recipeController = async () => {
 
     //must use state
     const id = window.location.hash.replace("#", "");
-    console.log(id);
+    //console.log(id);
     //checks if there is an id in the url, (i.e not home)
     if (id) {
         //prepare ui for changes
         recipeView.clearRecipe();
         renderLoader(elements.recipeDiv);
+        
+        //highlight the selected search iten
+
+        if (state.search) {
+            searchView.highlightSelected(id);
+        }
+        
+
+        
         //create new recipe object
         state.recipe = new Recipe(id);
         try {
@@ -111,7 +119,7 @@ const recipeController = async () => {
             recipeView.renderRecipe(state.recipe);
            
 
-            console.log(state.recipe);
+            //console.log(state.recipe);
         } catch (error) {
             alert(error);
         }
@@ -120,5 +128,34 @@ const recipeController = async () => {
 };
 
 
+
+
 ['hashchange', 'load'].forEach(e =>
     elements.windowResult.on(e, recipeController));
+
+//Handling recipe button clicks
+elements.recipeDiv.click(e => {
+    if (e.target.matches('.btn-decrease, .btn-decrease *')) {
+        if (state.recipe.servings > 1) {
+            state.recipe.updateServings('dec');
+            recipeView.updateServingsView(state.recipe);
+        }
+    } else if (e.target.matches('.btn-increse, .btn-increase *')){
+        state.recipe.updateServings('inc');
+        recipeView.updateServingsView(state.recipe);
+    }
+    //console.log(state.recipe);
+
+
+});
+
+window.l = new List();
+
+const listController = async () => {
+    //prepare the ui
+
+    //add the need recipe upon the click
+
+    //update the ui
+
+}

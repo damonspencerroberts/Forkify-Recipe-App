@@ -1,24 +1,62 @@
-import { elements } from "./base";
+import {
+    elements
+} from "./base";
+import * as math  from "mathjs";
+import $ from "jquery";
 
 
 
 
 export const clearRecipe = () => elements.recipeDiv.html('');
 
+/**
+ * 
+ * const d = t.d;
+const n = t.n;
+console.log(`${n}/${d}`);
+ */
+//restructuring the numbers to be fractions
+//this uses the mathjs package
+//also this changes every decimal to fractions
+const formatCount = count => {
 
-const createIngredients = ing => `
+    if (count) {
+        // count = 2.5 --> 5/2 --> 2 1/2
+        // count = 0.5 --> 1/2
+        //const count = Math.round(count * 10000) / 10000;
+        const [int, dec] = count.toString().split('.').map(el => parseInt(el, 10));
+        if (!dec) return count;
+        if (int === 0) {
+        // const fr = math.fraction(count);
+            const fr = math.fraction(count);
+            //console.log(`in the if: ${fr.n}/${fr.d}`);
+            return `${fr.n}/${fr.d}`;
+        } else {
+            const fr = math.fraction(count - int);
+            // console.log(fr); 
+            // console.log(` in the else: ${int} ${fr.n}/${fr.d}`);
+            return `${int} ${fr.n}/${fr.d}`;
+        }
+    }
+    return '?';
+};
+
+
+const createIngredients = ing => {
+    const newCount = formatCount(ing.count);
+    return `
     <li class="recipe__item">
         <svg class="recipe__icon">
             <use href="img/icons.svg#icon-check"></use>
         </svg>
-        <div class="recipe__count">${ing.count}</div>
+        <div class="recipe__count">${newCount}</div>
         <div class="recipe__ingredient">
             <span class="recipe__unit">${ing.unit}</span>
             ${ing.ingredient}
         </div>
     </li>
     `
-
+}
 export const renderRecipe = recipe => {
     const markUp = `
     <figure class="recipe__fig">
@@ -45,12 +83,12 @@ export const renderRecipe = recipe => {
                     <span class="recipe__info-text"> servings</span>
 
                     <div class="recipe__info-buttons">
-                        <button class="btn-tiny">
+                        <button class="btn-tiny btn-decrease">
                             <svg>
                                 <use href="img/icons.svg#icon-circle-with-minus"></use>
                             </svg>
                         </button>
-                        <button class="btn-tiny">
+                        <button class="btn-tiny btn-increase">
                             <svg>
                                 <use href="img/icons.svg#icon-circle-with-plus"></use>
                             </svg>
@@ -96,4 +134,16 @@ export const renderRecipe = recipe => {
             </div>
     `
     elements.recipeDiv.append(markUp);
+}
+
+export const updateServingsView = recipe => {
+
+    $(".recipe__info-data--people").text(recipe.servings);
+
+    const countElements = Array.from(document.querySelectorAll('.recipe__count'));
+    countElements.forEach((e, i) => {
+        console.log(formatCount(recipe.recipeIngredients[i].count));
+        e.textContent = formatCount(recipe.recipeIngredients[i].count);
+    });
+
 }

@@ -1,0 +1,52 @@
+    Part 5
+    //homepage button
+    //show original method
+    //created method
+    //added two arrays and mapped throug to set each to lowercase and then for each in unitLong replace with unitShort
+    //replace parenthesis with space or nothing
+    //create array by splitting at ' '
+    //created unitIndex by finding the index in the newly split arrays. Find index where arrIngredients includes unitsShort
+    //if unit index was greater than -1 unit, parseInt(arrIng[0] === true) maybe unit, === -1 no unit
+    //1) create new array by slice at 0 to unitIndex, aka how many there were
+    //   - if array length === 1 set count = to first index and replace - with +
+     //   - else evaluate array ingredients sliced at 0, to unit index and join with + 
+
+    //   set count = count, unit = arrIngredients[unitIndex] and ingredient to arrIngredients.slice(unitIndex + 1).join(' ')
+    //2) set count = parseInt(arrIng[0]), unit '', and ingredient to arrIngredients.slice(1).join(' ')
+    //3) set count = 1, unit '', ingredient to ingredient
+    //set ingredients to the new ingredients
+
+
+    Part 6
+
+    //-------------------------------------------------------------
+
+    //first created new file and function renderRecipe (displays on the ui)
+    //took html elements and put them into the new function, using template literals added elements from recipe
+    //then for ingredients mapped throught the array and for each ingedients added it to the ui
+    //then we appended the recipe to the html file
+    //imported it in the index.js file controller
+    //called it when id is found, and display on UI
+    //added the loader, and removed when found
+    //cleared input if new id was clicked
+
+    Part 7
+    //--------------------------------------
+    //Updated the numbers to be fractions
+    //Use external package
+    //Updated highlighted screen
+
+    Part 8
+    //--------------------------------------
+    //Added the +/- buttons to work 
+    //update servings, and then update ingredient numbers
+    //Then added it to the UI
+
+    Part 9
+    --------------------------------------------
+    //All items in shopping list will be stored here
+    //Object w/ count unit and ing
+    //adds item when clicked
+    //deletes portion of the array
+    //[2,4,6] splice(1,1) return [2,6]
+    //a way to update the count when it is in the shopping list
