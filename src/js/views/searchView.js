@@ -1,4 +1,6 @@
-import {elements} from "./base";
+import {
+    elements
+} from "./base";
 import $ from "jquery";
 
 //takes the value inputed by the useer
@@ -16,7 +18,7 @@ export const clearResults = () => {
 //remove the hightlight then add the highlights
 export const highlightSelected = id => {
     $(".results__link").removeClass("results__link--active");
-    $(`a[href="#${id}"]`).addClass("results__link--active");
+    $(`.results__link[href="#${id}"]`).addClass("results__link--active");
 }
 
 export const recipeTitleLimit = (title, limit = 17) => {
@@ -27,11 +29,11 @@ export const recipeTitleLimit = (title, limit = 17) => {
         //turns into array by space
         //0 is set as initial (accum) value, callback takes
         //value of accumulator and current value
-        title.split(' ').reduce((acc, cur) =>{
-            if(acc + cur.length <= limit) {
+        title.split(' ').reduce((acc, cur) => {
+            if (acc + cur.length <= limit) {
                 newTitle.push(cur);
             }
-            return acc + cur.length        
+            return acc + cur.length
         }, 0);
         //return the result
         //joins the array by spaces...
@@ -44,8 +46,8 @@ export const recipeTitleLimit = (title, limit = 17) => {
 export const renderRecipe = recipe => {
     //jquery to add the html to the file on top of eachother
     //this uses the append method
-    const markUp = 
-    `
+    const markUp =
+        `
     <li>
         <a class="results__link" href="#${recipe.recipe_id}">
          <figure class="results__fig">
@@ -82,10 +84,9 @@ const renderButtons = (page, numResults, resPerPage) => {
     //res per page(i.e 10) and we get rounded 3 so 3 pageSP
     //and three buttons
     const pages = Math.ceil(numResults / resPerPage);
-    //console.log(`Amount of Pages : ${pages}`);
 
     let button;
-    
+
     if (page === 1 && pages > 1) {
         button = createButton(1, 'next');
 
@@ -109,11 +110,9 @@ export const renderResults = (recipes, page = 1, perPage = 10) => {
     //render results of current page 
     const start = (page - 1) * perPage;
     const end = page * perPage;
-    
+
     //loops through each item in the array of recipes
     recipes.slice(start, end).forEach(renderRecipe);
-
-    //console.log(recipes);
     //page buttons
     renderButtons(page, recipes.length, perPage);
 };

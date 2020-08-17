@@ -17,9 +17,8 @@ export default class Recipe {
             this.recipeUrl = res.data.recipe.source_url;
             //going to bring up an array of ingredients
             this.recipeIngredients = res.data.recipe.ingredients;
-            //console.log(res);
 
-        } catch(error) {
+        } catch (error) {
             alert(error);
         }
     }
@@ -36,11 +35,11 @@ export default class Recipe {
 
     parseIngredients() {
         //loop through unitslong and replace with unitsshort
-        const unitsLong = ['tablespoons', 'tablespoon', 'ounces', 'ounce', 'teaspoons', 'teaspoon', 'cups', 'pounds' ];
+        const unitsLong = ['tablespoons', 'tablespoon', 'ounces', 'ounce', 'teaspoons', 'teaspoon', 'cups', 'pounds'];
         const unitsShort = ['tbsp', 'tbsp', 'oz', 'oz', 'tsp', 'tsp', 'cup', 'pound'];
         const units = [...unitsShort, "g", "kg"];
 
-        const newIngredients = this.recipeIngredients.map(el=> {
+        const newIngredients = this.recipeIngredients.map(el => {
             //uniform units
             let ingredient = el.toLowerCase();
             unitsLong.forEach((unit, i) => {
@@ -54,20 +53,18 @@ export default class Recipe {
             //constant that splits each ingredient by space
             //and makes array
             const arrIngredients = ingredient.split(' ');
-            //Sconsole.log(arrIngredients);
 
             const unitIndex = arrIngredients.findIndex(el2 => units.includes(el2));
-            //Pconsole.log(unitIndex);
 
-                //tests each elements in the arrIng array and
-                //checks where it is
+            //tests each elements in the arrIng array and
+            //checks where it is
             let objIngredient;
-            if(unitIndex > -1) {
+            if (unitIndex > -1) {
                 //there is a unit
                 //example: 4 1/2 will be [4, 1/2] eval("4+1/2") --> 4.5
                 //Example 4 cups, arrcount = [4]P
                 const arrCount = arrIngredients.slice(0, unitIndex);
-                
+
                 let count;
                 if (arrCount.length === 1) {
                     count = eval(arrIngredients[0].replace('-', '+'));
@@ -107,8 +104,8 @@ export default class Recipe {
     //this goes on in the background
     updateServings(type) {
         //servings
-        const nS = type === 'dec' ? this.servings - 1: this.servings + 1;
-        
+        const nS = type === 'dec' ? this.servings - 1 : this.servings + 1;
+
 
         //ingredients
         this.recipeIngredients.forEach(ing => {
@@ -118,4 +115,3 @@ export default class Recipe {
         this.servings = nS;
     }
 }
-

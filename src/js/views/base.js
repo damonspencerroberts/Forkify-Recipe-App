@@ -23,7 +23,7 @@ export const domStrings = {
 //clear the loader method for when the results show up
 export const clearLoader = () => {
     const loader = $(`.${domStrings.loader}`);
-    if(loader) {
+    if (loader) {
         $(domStrings.div).remove(`.${domStrings.loader}`);
     }
 }

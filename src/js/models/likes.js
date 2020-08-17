@@ -6,9 +6,9 @@ export default class Likes {
     //adds them to the likes array
     addLike(id, title, author, img) {
         const like = {
-            id, 
-            title, 
-            author, 
+            id,
+            title,
+            author,
             img
         };
         this.likes.push(like);
@@ -20,10 +20,10 @@ export default class Likes {
     }
 
     //takes the id finds index and removes
-    deleteLike (id) {
+    deleteLike(id) {
         const index = this.likes.findIndex(e => e.id === id);
         this.likes.splice(index, 1);
-        
+
         //remove data from local storage
         this.dataPersist();
     }

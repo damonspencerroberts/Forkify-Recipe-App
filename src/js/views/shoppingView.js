@@ -1,4 +1,6 @@
-import { elements } from './base';
+import {
+    elements
+} from './base';
 import $ from "jquery";
 
 //select the id of the item base on its id

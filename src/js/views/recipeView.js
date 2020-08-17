@@ -1,7 +1,7 @@
 import {
     elements
 } from "./base";
-import * as math  from "mathjs";
+import * as math from "mathjs";
 import $ from "jquery";
 
 
@@ -13,7 +13,6 @@ export const clearRecipe = () => elements.recipeDiv.html('');
  * 
  * const d = t.d;
 const n = t.n;
-console.log(`${n}/${d}`);
  */
 //restructuring the numbers to be fractions
 //this uses the mathjs package
@@ -27,14 +26,11 @@ const formatCount = count => {
         const [int, dec] = count.toString().split('.').map(el => parseInt(el, 10));
         if (!dec) return count;
         if (int === 0) {
-        // const fr = math.fraction(count);
+            // const fr = math.fraction(count);
             const fr = math.fraction(count);
-            //console.log(`in the if: ${fr.n}/${fr.d}`);
             return `${fr.n}/${fr.d}`;
         } else {
             const fr = math.fraction(count - int);
-            // console.log(fr); 
-            // console.log(` in the else: ${int} ${fr.n}/${fr.d}`);
             return `${int} ${fr.n}/${fr.d}`;
         }
     }
@@ -142,7 +138,6 @@ export const updateServingsView = recipe => {
 
     const countElements = Array.from(document.querySelectorAll('.recipe__count'));
     countElements.forEach((e, i) => {
-        console.log(formatCount(recipe.recipeIngredients[i].count));
         e.textContent = formatCount(recipe.recipeIngredients[i].count);
     });
 

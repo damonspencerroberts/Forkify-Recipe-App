@@ -39,11 +39,9 @@ window.state = state;
 const controlSearch = async () => {
     //1) get query from view
     const query = searchView.getInput();
-    console.log(query);
 
     if (query) {
         //const search = new Search('pizza');
-        //console.log(search);
         //search.getResults();
         //2)new search object and add to state
         state.search = new Search(query);
@@ -62,7 +60,6 @@ const controlSearch = async () => {
             searchView.renderResults(state.search.result);
             // clear loader methodS
             clearLoader();
-            //console.log(state.search.result)
         } catch (error) {
             alert("Error Fetching Results on search")
             clearLoader();
@@ -83,7 +80,6 @@ elements.searchResultsPages.click(e => {
         const goTo = parseInt(closeButton.dataset.page, 10);
         searchView.clearResults();
         searchView.renderResults(state.search.result, goTo);
-        //console.log(goTo);
     }
 });
 
@@ -96,7 +92,7 @@ elements.searchResultsPages.click(e => {
  //created from the R class constructor
  const r = new Recipe(35477);
  r.getRecipe();
-console.log(r)*/
+*/
 
 //needed to add the function up here
 const recipeController = async () => {
@@ -105,7 +101,6 @@ const recipeController = async () => {
 
     //must use state
     const id = window.location.hash.replace("#", "");
-    //console.log(id);
     //checks if there is an id in the url, (i.e not home)
     if (id) {
         //prepare ui for changes
@@ -136,7 +131,6 @@ const recipeController = async () => {
             );
 
 
-            console.log(state.recipe);
         } catch (error) {
             alert(error);
         }
@@ -221,7 +215,6 @@ const likeController = () => {
         //add like to the ui list
         displayLikeMenu(nL);
 
-        console.log(state.likes);
 
 
 
@@ -235,7 +228,7 @@ const likeController = () => {
         //delete like to the ui list
         removeLikeMenuItem(curId);
 
-        console.log(state.likes);
+
     }
     //removes the column button when there is 0 likes
     likeMenuToggle(state.likes.getNumLikes());
@@ -274,6 +267,6 @@ elements.recipeDiv.click(e => {
         likeController();
 
     }
-    //console.log(state.recipe);
+
 
 });
