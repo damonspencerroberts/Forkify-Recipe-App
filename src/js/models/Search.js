@@ -1,5 +1,4 @@
 import Axios from "axios";
-import {clearLoader} from "../views/base";
 
 export default class Search {
     constructor(query) {
@@ -13,10 +12,7 @@ export default class Search {
         } catch (error) {
             alert(error);
         }
-        
-
     }
-
 }
 
 

@@ -79,6 +79,44 @@
     //create new variable holding the count value
     //update the state of the list
 
+    Part 13
+    -------------------------------------------
+    //takes the inputs id, title, author and img 
+    //adds them to the likes array
+    //takes the id finds index and removes
+    //takes the id finds index and checks if it is different from -1
+    //returns the number of likes
+    //check if likes exist yet, create new likes object
+    //variable for id
+    //checks to see if liked is false
+    //user hasnt liked the recipe yet
+    //add like to the state
+    //add the cur variables to like object state
+    //toggle the like button
+    //liking the recipe so set to true
+    //add like to the ui list
+    //delete like to the state
+    //toggle the like button
+    //unliking the recipe so set to false
+    //delete like to the ui list
+    //removes the column button when there is 0 likes
+    //toggle button if it is liked or not
+    //if number of likes > 0 then likes menu should be visible
+    //otherwise it should be hidden
+    //append the liked ingredients to the ui
+    //this is done through adding elements specified in the likes class to the html markup
+    //method to remove the item from the menu bar tap into the class of id then remove parent
+    //limit title characters
+    //adds the data to local storage!
+    //gets the item back from local storage
+    //Restore liked recipes everytime the page loads
+    //restore the likes
+    //button is displayed as such
+    //render the existing likes
+    //on window load add the window loaded starting elements
+
+
+
 
 
 

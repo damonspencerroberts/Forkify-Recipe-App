@@ -19,7 +19,7 @@ export const highlightSelected = id => {
     $(`a[href="#${id}"]`).addClass("results__link--active");
 }
 
-const recipeTitleLimit = (title, limit = 17) => {
+export const recipeTitleLimit = (title, limit = 17) => {
     const newTitle = [];
     //if the title.length is greater than preset limit
     if (title.length > limit) {

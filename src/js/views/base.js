@@ -8,8 +8,11 @@ export const elements = {
     searchResultsPages: $('.results__pages'),
     windowResult: $(window),
     recipeDiv: $('.recipe'),
-    shopping: $('.shopping__list')
+    shopping: $('.shopping__list'),
+    likesMenu: $('.likes__field'),
+    likelist: $('.likes__list')
 }
+
 //add domstrings object
 export const domStrings = {
     div: "div",
