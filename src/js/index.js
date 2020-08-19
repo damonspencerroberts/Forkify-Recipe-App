@@ -221,14 +221,11 @@ const likeController = () => {
     } else { //user has liked the like button
         //delete like to the state
         state.likes.deleteLike(curId);
-
         //toggle the like button
         //unliking the recipe so set to false
         likeToggleBtn(false);
         //delete like to the ui list
         removeLikeMenuItem(curId);
-
-
     }
     //removes the column button when there is 0 likes
     likeMenuToggle(state.likes.getNumLikes());
@@ -265,8 +262,13 @@ elements.recipeDiv.click(e => {
     } else if (e.target.matches('.recipe__love, .recipe__love *')) {
         //catch the click of the like button
         likeController();
-
     }
-
-
 });
+
+const removeAllLikes = () => {
+    state.likes.deleteAllLikes();
+
+    likeMenuToggle(state.likes.getNumLikes());
+}
+
+elements.rmAll.click(removeAllLikes);

@@ -10,7 +10,8 @@ export const elements = {
     recipeDiv: $('.recipe'),
     shopping: $('.shopping__list'),
     likesMenu: $('.likes__field'),
-    likelist: $('.likes__list')
+    likelist: $('.likes__list'),
+    rmAll: $('.rm-btn')
 }
 
 //add domstrings object

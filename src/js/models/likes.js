@@ -23,10 +23,17 @@ export default class Likes {
     deleteLike(id) {
         const index = this.likes.findIndex(e => e.id === id);
         this.likes.splice(index, 1);
+        console.log(this.likes);
 
         //remove data from local storage
         this.dataPersist();
     }
+
+    deleteAllLikes() {
+        this.likes = [];
+        this.dataPersist();
+    }
+
     //takes the id finds index and checks if it is different from -1
     isItLiked(id) {
         return this.likes.findIndex(e => e.id === id) !== -1;
